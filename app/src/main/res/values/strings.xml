@@ -3,4 +3,12 @@
     <string name="login_label">Welcome Back</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_up_label">New to Fannak?</string>
+    <string name="set_your_language">Set your language</string>
+    <string name="english">English</string>
+    <string name="arabic">العربية</string>
+    <string name="next">Next</string>
+    <string name="continue_as_a_guest">Continue as a guest</string>
+    <string name="sign_up">Sign up</string>
 </resources>

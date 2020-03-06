@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="_15">15sp</dimen>
     <dimen name="_40">40sp</dimen>
     <dimen name="layout_start_margin">26dp</dimen>
     <dimen name="_16">16sp</dimen>
@@ -7,4 +8,6 @@
     <dimen name="edittext_top_margin">8dp</dimen>
     <dimen name="edittext_height">44dp</dimen>
     <dimen name="card_default_radius">5dp</dimen>
+    <dimen name="button_hieght">54dp</dimen>
+    <dimen name="_32">32sp</dimen>
 </resources>
