@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="_15">15sp</dimen>
-    <dimen name="_40">40sp</dimen>
-    <dimen name="layout_start_margin">26dp</dimen>
     <dimen name="_16">16sp</dimen>
-    <dimen name="edittext_horizontal_margin">26dp</dimen>
+    <dimen name="_20">20sp</dimen>
+    <dimen name="_32">32sp</dimen>
+    <dimen name="_40">40sp</dimen>
+
+    <dimen name="layout_start_margin">26dp</dimen>
+    <dimen name="default_horizontal_margin">24dp</dimen>
     <dimen name="edittext_top_margin">8dp</dimen>
     <dimen name="edittext_height">44dp</dimen>
     <dimen name="card_default_radius">5dp</dimen>
     <dimen name="button_hieght">54dp</dimen>
-    <dimen name="_32">32sp</dimen>
+    <dimen name="layout_top_margin">46dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="label_layout_size">40dp</dimen>
+    <dimen name="banner_padding_end">8dp</dimen>
+    <dimen name="banner_margin_end">14dp</dimen>
+    <dimen name="appbar_text_margin_start">10dp</dimen>
+    <dimen name="featured_margin_end">10dp</dimen>
 </resources>

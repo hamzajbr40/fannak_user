@@ -28,7 +28,7 @@
 
     <RadioGroup
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="70dp"
         app:layout_constraintBottom_toTopOf="@+id/next_btn"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,7 +44,7 @@
             android:checked="true"
             android:drawableStart="@drawable/radio_drawable"
             android:drawablePadding="17.0dip"
-            android:fontFamily="@font/english_regular"
+            android:fontFamily="@font/english_medium"
             android:text="@string/english"
             android:textColor="@drawable/radio_text_color"
             android:textSize="@dimen/_16" />
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="17.0dip"
             android:button="@null"
-            android:fontFamily="@font/english_regular"
+            android:fontFamily="@font/english_medium"
             android:drawableStart="@drawable/radio_drawable"
             android:drawablePadding="17.0dip"
             android:text="@string/arabic"
@@ -67,7 +67,7 @@
         android:id="@+id/next_btn"
         android:layout_width="0dp"
         android:layout_height="@dimen/button_hieght"
-        android:layout_marginHorizontal="@dimen/edittext_horizontal_margin"
+        android:layout_marginHorizontal="@dimen/default_horizontal_margin"
         android:layout_marginBottom="40dp"
         android:text="@string/next"
         app:layout_constraintBottom_toBottomOf="parent"

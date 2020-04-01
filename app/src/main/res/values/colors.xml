@@ -8,5 +8,9 @@
 
     <color name="unchecked_radio_font_color">#ffe1dedf</color>
     <color name="checked_radio_font_color">#ff193628</color>
+    <color name="hint_text_color">#ff8c8d99</color>
+    <color name="grey">#ffa3a3a4</color>
+    <color name="semi_black">#ff262628</color>
+    <color name="gray_dot">#ffa3a3a4</color>
 </resources>
 
