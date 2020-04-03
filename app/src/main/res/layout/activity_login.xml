@@ -120,23 +120,26 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/sign_up_btn"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sign_up"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        app:layout_constraintTop_toBottomOf="@id/sign_up_label"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/sign_up_label" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/guest_btn"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="@dimen/button_hieght"
-        android:layout_marginBottom="40dp"
         android:layout_marginHorizontal="@dimen/default_horizontal_margin"
+        android:layout_marginTop="64dp"
+        android:layout_marginBottom="40dp"
         android:text="@string/continue_as_a_guest"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        app:strokeColor="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/sign_up_btn"
+        app:strokeColor="@color/colorPrimary" />
 </androidx.constraintlayout.widget.ConstraintLayout>
