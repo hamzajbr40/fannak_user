@@ -1,6 +1,9 @@
 package com.hamzajbr.fannak_user.utilities;
 
 public class Constants {
+
+    public static final String BASE_URL = "https://fannak.azurewebsites.net/api/";
+
     public static final String USER_LANGUAGE = "USER_LANGUAGE";
     public static final String FIRST_TIME_LAUNCH = "FIRST_TIME_LAUNCH";
     public static final String ENGLISH_LANGUAGE = "en";

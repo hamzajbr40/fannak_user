@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/appBar"
+    android:background="@android:color/transparent"
+    android:fitsSystemWindows="true">
+    <com.google.android.material.appbar.CollapsingToolbarLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="true"
+        android:background="@android:color/transparent"
+        android:foregroundGravity="bottom|right"
+        android:foregroundTintMode="add"
+        app:contentScrim="@android:color/transparent"
+        app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="10dp">
+            <ImageView
+                android:id="@+id/fannak_appbar_logo"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:src="@drawable/fannak_appbar_logo"
+                android:layout_marginStart="@dimen/default_horizontal_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:contentDescription="@string/fannak_logo" />
+
+            <ImageButton
+                android:id="@+id/search_btn"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:src="@drawable/ic_search"
+                android:scaleType="centerInside"
+                android:padding="11dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="@string/search"
+                android:layout_marginEnd="@dimen/default_horizontal_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+
+</com.google.android.material.appbar.AppBarLayout>

@@ -5,8 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/appBar"
     android:background="@android:color/transparent"
-    android:fitsSystemWindows="true"
-    android:paddingTop="10dp">
+    android:fitsSystemWindows="true">
     <com.google.android.material.appbar.CollapsingToolbarLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -18,7 +17,8 @@
         app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingTop="10dp">
     <ImageView
         android:id="@+id/fannak_appbar_logo"
         android:layout_width="46dp"
@@ -44,7 +44,7 @@
             <TextView
                 android:id="@+id/name_tv"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:text="@string/guest"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_32"

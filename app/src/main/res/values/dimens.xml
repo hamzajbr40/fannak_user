@@ -21,4 +21,5 @@
     <dimen name="banner_margin_end">14dp</dimen>
     <dimen name="appbar_text_margin_start">10dp</dimen>
     <dimen name="featured_margin_end">10dp</dimen>
+    <dimen name="tab_corner_radius">20dp</dimen>
 </resources>

@@ -1,6 +1,7 @@
 package com.hamzajbr.fannak_user.adapters;
 
 import android.content.Context;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +10,10 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.hamzajbr.fannak_user.R;
 import com.hamzajbr.fannak_user.models.BannerItem;
+import com.hamzajbr.fannak_user.utilities.Utils;
 
 import java.util.ArrayList;
 
@@ -40,7 +43,9 @@ public class BannersAdapter extends RecyclerView.Adapter<BannersAdapter.BannersV
     @Override
     public void onBindViewHolder(@NonNull BannersViewHolder holder, int position) {
         BannerItem item = myList.get(position);
-        holder.bannerImg.setImageDrawable(context.getResources().getDrawable(item.bannerImg));
+        byte[] imageByteArray = Base64.decode(item.bannerImg,Base64.DEFAULT);
+        Glide.with(context).load(imageByteArray).into(holder.bannerImg);
+
 
     }
 
