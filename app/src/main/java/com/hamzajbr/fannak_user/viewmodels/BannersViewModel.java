@@ -15,11 +15,11 @@ public class BannersViewModel extends ViewModel {
 
     public void init(){
         if (banners != null){
-            return;
-        }
-        bannersRepository = BannersRepository.getInstance();
-        banners = bannersRepository.getBanners();
+        return;
     }
+    bannersRepository = BannersRepository.getInstance();
+    banners = bannersRepository.getBanners();
+}
     public LiveData<List<BannerItem>> getBanners(){
         return banners;
     }

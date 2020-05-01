@@ -18,8 +18,11 @@ import android.view.ViewGroup;
 
 import com.hamzajbr.fannak_user.R;
 import com.hamzajbr.fannak_user.adapters.BannersAdapter;
+import com.hamzajbr.fannak_user.adapters.FeaturedAdapter;
 import com.hamzajbr.fannak_user.models.BannerItem;
+import com.hamzajbr.fannak_user.models.ProductItem;
 import com.hamzajbr.fannak_user.viewmodels.BannersViewModel;
+import com.hamzajbr.fannak_user.viewmodels.FeaturedViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +41,9 @@ public class HomeFragment extends Fragment {
     @BindView(R.id.banner_rv)
     RecyclerView bannerRv;
 
+    @BindView(R.id.featured_items_rv)
+    RecyclerView featuredRv;
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -50,7 +56,8 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         unbinder = ButterKnife.bind(this,view);
 
-        initBannerRecycler(bannerRv,initBannerArraylist());
+        initBannerRecycler(bannerRv,initBannerArrayList());
+        initFeaturedRecycler(featuredRv,initFeaturedArrayList());
 
         return view;
     }
@@ -66,14 +73,31 @@ public class HomeFragment extends Fragment {
         adapter.notifyDataSetChanged();
     }
 
-    private ArrayList<BannerItem> initBannerArraylist(){
+    private ArrayList<BannerItem> initBannerArrayList(){
         ArrayList<BannerItem> list = new ArrayList<>();
-        BannersViewModel bannersViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(BannersViewModel.class);
+        BannersViewModel bannersViewModel = ViewModelProviders.of(getActivity()).get(BannersViewModel.class);
         bannersViewModel.init();
         bannersViewModel.getBanners().observe(getViewLifecycleOwner(), bannerItems -> {
             list.addAll(bannerItems);
         });
 
         return list;
+    }
+
+    private ArrayList<ProductItem> initFeaturedArrayList(){
+        ArrayList<ProductItem> list = new ArrayList<>();
+        FeaturedViewModel featuredViewModel = ViewModelProviders.of(getActivity()).get(FeaturedViewModel.class);
+        featuredViewModel.init();
+        featuredViewModel.getFeaturedProducts().observe(getViewLifecycleOwner(), productItems -> list.addAll(productItems));
+
+        return list;
+    }
+
+    private void initFeaturedRecycler(RecyclerView FeaturedRv, ArrayList<ProductItem> myList){
+        FeaturedAdapter adapter = new FeaturedAdapter(getContext(),myList,item -> {
+        });
+        FeaturedRv.setAdapter(adapter);
+        FeaturedRv.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        adapter.notifyDataSetChanged();
     }
 }

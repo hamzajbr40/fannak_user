@@ -22,4 +22,7 @@
     <dimen name="appbar_text_margin_start">10dp</dimen>
     <dimen name="featured_margin_end">10dp</dimen>
     <dimen name="tab_corner_radius">20dp</dimen>
+    <dimen name="default_top_margin">20dp</dimen>
+    <dimen name="category_card_height">90dp</dimen>
+    <dimen name="category_margin_top">10dp</dimen>
 </resources>

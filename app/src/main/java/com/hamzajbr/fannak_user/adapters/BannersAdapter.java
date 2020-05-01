@@ -46,6 +46,13 @@ public class BannersAdapter extends RecyclerView.Adapter<BannersAdapter.BannersV
         byte[] imageByteArray = Base64.decode(item.bannerImg,Base64.DEFAULT);
         Glide.with(context).load(imageByteArray).into(holder.bannerImg);
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callback.onClick(item);
+            }
+        });
+
 
     }
 
