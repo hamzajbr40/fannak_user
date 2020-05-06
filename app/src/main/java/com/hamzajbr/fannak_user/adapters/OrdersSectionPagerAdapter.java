@@ -12,7 +12,9 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.hamzajbr.fannak_user.R;
 import com.hamzajbr.fannak_user.fragments.CurrentOrdersFragment;
+import com.hamzajbr.fannak_user.fragments.NoOrdersFragment;
 import com.hamzajbr.fannak_user.fragments.PrevOrdersFragment;
+import com.hamzajbr.fannak_user.utilities.Utils;
 
 public class OrdersSectionPagerAdapter extends FragmentPagerAdapter {
 
@@ -32,9 +34,18 @@ public class OrdersSectionPagerAdapter extends FragmentPagerAdapter {
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
         if (position == 0) {
-            return new PrevOrdersFragment();
+            if(Utils.getValue(mContext,"signed in",true)) {
+                return new PrevOrdersFragment();
+            }
+            else
+                return new NoOrdersFragment();
         } else
-            return new CurrentOrdersFragment();
+            if(Utils.getValue(mContext,"signed in",true)){
+                return new CurrentOrdersFragment();
+            }
+            else {
+                return new NoOrdersFragment();
+            }
     }
 
     @Nullable

@@ -11,6 +11,8 @@ public class ProductItem {
     public String category;
     @SerializedName("Item_Seller")
     public int sellerID;
+    @SerializedName("Seller_Name")
+    public String sellerName;
     @SerializedName("ID")
     public int itemID;
     @SerializedName("Item_Description")

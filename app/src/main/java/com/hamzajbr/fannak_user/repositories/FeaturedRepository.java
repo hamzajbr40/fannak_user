@@ -1,5 +1,7 @@
 package com.hamzajbr.fannak_user.repositories;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -36,6 +38,7 @@ public class FeaturedRepository {
             @Override
             public void onFailure(Call<BaseResponse<List<ProductItem>>> call, Throwable t) {
                 featuredData.setValue(null);
+                Log.e("onFailure","GET FEATURED API CALL FAIL",t);
             }
         });
         return featuredData;

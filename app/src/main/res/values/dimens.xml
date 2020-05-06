@@ -25,4 +25,9 @@
     <dimen name="default_top_margin">20dp</dimen>
     <dimen name="category_card_height">90dp</dimen>
     <dimen name="category_margin_top">10dp</dimen>
+    <dimen name="_26">26sp</dimen>
+    <dimen name="_18">18sp</dimen>
+    <dimen name="_31">31sp</dimen>
+    <dimen name="_12">12sp</dimen>
+    <dimen name="_19">19sp</dimen>
 </resources>

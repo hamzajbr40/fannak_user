@@ -44,7 +44,7 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
         holder.productName.setText(item.name);
 
         //Todo change it to seller name
-        holder.sellerName.setText(( item.sellerID+""));
+        holder.sellerName.setText(( item.sellerName));
         holder.categoryName.setText(item.category);
         holder.productPrice.setText(item.price+" JD");
         byte[] imageByteArray = Base64.decode(item.image,Base64.DEFAULT);

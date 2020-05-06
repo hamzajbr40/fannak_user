@@ -10,6 +10,7 @@ import com.hamzajbr.fannak_user.models.requests.SearchByNameRequest;
 import com.hamzajbr.fannak_user.models.requests.SearchByTypeRequest;
 import com.hamzajbr.fannak_user.models.requests.SignupRequest;
 import com.hamzajbr.fannak_user.models.responses.BaseResponse;
+import com.hamzajbr.fannak_user.models.responses.LoginResponse;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -30,7 +31,7 @@ public interface APIManager {
 
 
     @POST("customerLogin")
-    Call<BaseResponse> login(@Body LoginRequest body);
+    Call<BaseResponse<LoginResponse>> login(@Body LoginRequest body);
 
     @POST("customerSignup")
     Call<BaseResponse> signup(@Body SignupRequest body);

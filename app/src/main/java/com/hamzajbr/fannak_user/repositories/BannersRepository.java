@@ -1,5 +1,7 @@
 package com.hamzajbr.fannak_user.repositories;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -37,6 +39,7 @@ public class BannersRepository {
             @Override
             public void onFailure(Call<BaseResponse<List<BannerItem>>> call, Throwable t) {
                 bannersData.setValue(null);
+                Log.e("onFailure","GET BANNERS API CALL FAIL",t);
             }
         });
 
