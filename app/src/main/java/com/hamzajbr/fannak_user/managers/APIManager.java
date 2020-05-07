@@ -40,7 +40,7 @@ public interface APIManager {
     Call<BaseResponse<List<BannerItem>>> getBanner();
 
     @GET("getCategories")
-    Call<BaseResponse<CategoryItem>> getCategories();
+    Call<BaseResponse<List<CategoryItem>>> getCategories();
 
     @GET("getFeatured")
     Call<BaseResponse<List<ProductItem>>> getFeatured();

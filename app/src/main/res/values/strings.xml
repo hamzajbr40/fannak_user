@@ -47,4 +47,6 @@
     <string name="account">Account</string>
     <string name="about_us">About us</string>
     <string name="wow_such_empty">Wow, such empty</string>
+    <string name="select_product_category_type">Select Product category type</string>
+    <string name="select_one_of_these_sub_categories">select one of these sub categories</string>
 </resources>

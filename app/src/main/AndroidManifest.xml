@@ -17,7 +17,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activities.ProductsActivity"></activity>
+        <activity android:name=".activities.AllProductsActivity"></activity>
+        <activity android:name=".activities.ProductsActivity" />
         <activity android:name=".activities.CategoryActivity" />
         <activity android:name=".activities.ContactUsActivity" />
         <activity android:name=".activities.AboutUsActivity" />

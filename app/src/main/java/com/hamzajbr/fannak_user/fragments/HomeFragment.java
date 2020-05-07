@@ -1,5 +1,6 @@
 package com.hamzajbr.fannak_user.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hamzajbr.fannak_user.R;
+import com.hamzajbr.fannak_user.activities.CategoryActivity;
 import com.hamzajbr.fannak_user.adapters.BannersAdapter;
 import com.hamzajbr.fannak_user.adapters.FeaturedAdapter;
 import com.hamzajbr.fannak_user.models.BannerItem;
@@ -30,6 +32,7 @@ import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -61,6 +64,15 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
+
+    @OnClick({R.id.arts_category_card,R.id.handcrafts_category_card})
+    void category(View card){
+        Intent i = new Intent(getActivity(), CategoryActivity.class);
+        i.putExtra("cardId",card.getId());
+        startActivity(i);
+
+    }
+
 
     private void initBannerRecycler(RecyclerView bannerRv, ArrayList<BannerItem> myList){
         BannersAdapter adapter = new BannersAdapter(getContext(),myList,item -> {

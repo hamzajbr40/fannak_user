@@ -14,5 +14,6 @@
     <color name="gray_dot">#ffa3a3a4</color>
     <color name="error">#FF1744</color>
     <color name="gray_txt">#9D9CAA</color>
+    <color name="transparent">@android:color/transparent</color>
 </resources>
 
