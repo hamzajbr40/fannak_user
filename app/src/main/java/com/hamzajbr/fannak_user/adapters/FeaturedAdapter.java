@@ -50,6 +50,13 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
         byte[] imageByteArray = Base64.decode(item.image,Base64.DEFAULT);
         Glide.with(context).load(imageByteArray).into(holder.productImg);
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callback.onClick(item);
+            }
+        });
+
 
     }
 

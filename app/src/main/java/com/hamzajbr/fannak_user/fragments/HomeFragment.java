@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 
 import com.hamzajbr.fannak_user.R;
 import com.hamzajbr.fannak_user.activities.CategoryActivity;
+import com.hamzajbr.fannak_user.activities.ProductActivity;
 import com.hamzajbr.fannak_user.adapters.BannersAdapter;
 import com.hamzajbr.fannak_user.adapters.FeaturedAdapter;
 import com.hamzajbr.fannak_user.models.BannerItem;
@@ -107,6 +108,9 @@ public class HomeFragment extends Fragment {
 
     private void initFeaturedRecycler(RecyclerView FeaturedRv, ArrayList<ProductItem> myList){
         FeaturedAdapter adapter = new FeaturedAdapter(getContext(),myList,item -> {
+            Intent i = new Intent(getActivity(), ProductActivity.class);
+            i.putExtra("product",item);
+            startActivity(i);
         });
         FeaturedRv.setAdapter(adapter);
         FeaturedRv.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));

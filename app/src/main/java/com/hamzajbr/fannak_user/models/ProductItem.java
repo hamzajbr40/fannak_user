@@ -2,7 +2,9 @@ package com.hamzajbr.fannak_user.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ProductItem {
+import java.io.Serializable;
+
+public class ProductItem implements Serializable {
     @SerializedName("Item_Name")
     public String name;
     @SerializedName("Item_Type")
