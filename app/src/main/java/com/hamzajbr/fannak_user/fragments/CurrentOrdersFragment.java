@@ -72,19 +72,16 @@ public class CurrentOrdersFragment extends Fragment {
     }
 
     private void initCurrentOrderRecycler(){
-        adapter = new CurrentOrderAdapter(getContext(), new CurrentOrderAdapter.IComplete() {
-            @Override
-            public void onClick(CurrentOrderItem item) {
-                completeOrderViewModel.init(item.orderId);
-                completeOrderViewModel.getResponse().observe(getViewLifecycleOwner(), new Observer<BasicResponse>() {
-                    @Override
-                    public void onChanged(BasicResponse basicResponse) {
-                        Toast.makeText(getActivity(),basicResponse.message,Toast.LENGTH_SHORT).show();
-                    }
-                });
+        adapter = new CurrentOrderAdapter(getContext(), item -> {
+            completeOrderViewModel.init(item.orderId);
+            completeOrderViewModel.getResponse().observe(getViewLifecycleOwner(), new Observer<BasicResponse>() {
+                @Override
+                public void onChanged(BasicResponse basicResponse) {
+                    Toast.makeText(getActivity(),basicResponse.message,Toast.LENGTH_SHORT).show();
+                }
+            });
 
 
-            }
         });
         currentOrdersRv.setAdapter(adapter);
         currentOrdersRv.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false));
