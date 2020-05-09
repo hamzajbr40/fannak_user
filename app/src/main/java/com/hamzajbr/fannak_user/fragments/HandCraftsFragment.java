@@ -1,5 +1,6 @@
 package com.hamzajbr.fannak_user.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hamzajbr.fannak_user.R;
+import com.hamzajbr.fannak_user.activities.AllProductsActivity;
 import com.hamzajbr.fannak_user.adapters.SubCategoryAdapter;
 import com.hamzajbr.fannak_user.models.CategoryItem;
 import com.hamzajbr.fannak_user.models.SubCategoryItem;
@@ -23,6 +25,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,6 +34,9 @@ public class HandCraftsFragment extends Fragment {
 
     @BindView(R.id.handcrafts_sub_category_rv)
     RecyclerView handcraftsRv;
+
+    SubCategoryAdapter adapter;
+    CategoriesViewModel categoriesViewModel;
 
     public HandCraftsFragment() {
         // Required empty public constructor
@@ -45,32 +51,39 @@ public class HandCraftsFragment extends Fragment {
         ButterKnife.bind(this,v);
 
         initHandcraftsRecycler();
+        categoriesViewModel = ViewModelProviders.of(getActivity()).get(CategoriesViewModel.class);
+        categoriesViewModel.init();
+        categoriesViewModel.getAllCategories().observe(getViewLifecycleOwner(), new Observer<List<CategoryItem>>() {
+            @Override
+            public void onChanged(List<CategoryItem> categoryItems) {
+                adapter.setItems((ArrayList<SubCategoryItem>) categoryItems.get(1).subCategoryList);
+            }
+        });
 
         return v;
     }
-    void initHandcraftsRecycler(){
-        SubCategoryAdapter adapter = new SubCategoryAdapter(getContext(), initHandcraftsArrayLIst(), new SubCategoryAdapter.ISubCategory() {
-            @Override
-            public void onClick(SubCategoryItem item) {
 
-            }
+    void initHandcraftsRecycler(){
+        adapter = new SubCategoryAdapter(getContext(), item -> {
+            Intent i = new Intent(getActivity(), AllProductsActivity.class);
+            i.putExtra("search",2);
+            i.putExtra("type",item.label);
+            startActivity(i);
+
         });
         handcraftsRv.setAdapter(adapter);
         handcraftsRv.setLayoutManager(new GridLayoutManager(getContext(),2));
         adapter.notifyDataSetChanged();
     }
-    ArrayList<SubCategoryItem> initHandcraftsArrayLIst(){
-        ArrayList<SubCategoryItem> list = new ArrayList<>();
-        CategoriesViewModel categoriesViewModel = ViewModelProviders.of(getActivity()).get(CategoriesViewModel.class);
-        categoriesViewModel.init();
-        categoriesViewModel.getAllCategories().observe(getViewLifecycleOwner(), new Observer<List<CategoryItem>>() {
-            @Override
-            public void onChanged(List<CategoryItem> categoryItems) {
-                list.addAll(categoryItems.get(1).subCategoryList);
-            }
-        });
-        return list;
+
+    @OnClick(R.id.all_handcrafts_btn)
+    void seeAllHandcraftsProducts(){
+        Intent i = new Intent(getActivity(), AllProductsActivity.class);
+        i.putExtra("search",1);
+        i.putExtra("category","Handcrafts");
+        startActivity(i);
     }
+
 
 
 }

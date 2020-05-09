@@ -35,13 +35,14 @@ public class LoginActivity extends AppCompatActivity {
     MaterialCardView emailCard;
     @BindView(R.id.password_card)
     MaterialCardView passwordCard;
-
+    LoginViewModel loginViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
 
 
         //for card stroke color indicator
@@ -67,7 +68,6 @@ public class LoginActivity extends AppCompatActivity {
     @OnClick(R.id.sign_in_btn)
     void signIn(View view) {
         if (isDataAreValid()){
-            LoginViewModel loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
             loginViewModel.init(createLoginRequest());
             loginViewModel.getResponse().observe(this, new Observer<BaseResponse<LoginResponse>>() {
                 @Override
@@ -78,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                     Utils.setValue(LoginActivity.this,"name",name);
                     Utils.setValue(LoginActivity.this,"id",name);
                     Utils.setValue(LoginActivity.this,"signed in",true);
+                    Utils.goToActivity(LoginActivity.this,MainActivity.class,true);
                 }
             });
         }

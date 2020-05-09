@@ -17,33 +17,36 @@ import com.hamzajbr.fannak_user.models.ProductItem;
 
 import java.util.ArrayList;
 
-public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.FeaturedViewHolder> {
+public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder> {
 
     private Context context;
-    private ArrayList<ProductItem> myList;
-    private IFeatured callback;
+    private ArrayList<ProductItem> myList = new ArrayList<>();
+    private IProducts callback;
 
-    public FeaturedAdapter(Context context, ArrayList<ProductItem> myList, IFeatured callback) {
+    public ProductsAdapter(Context context, IProducts callback) {
         this.context = context;
-        this.myList = myList;
+
         this.callback = callback;
+    }
+    public void setProducts( ArrayList<ProductItem> myList){
+        this.myList = myList;
+        notifyDataSetChanged();
     }
 
 
     @NonNull
     @Override
-    public FeaturedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ProductsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product,parent,false);
 
-        return new FeaturedViewHolder(v);
+        return new ProductsViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FeaturedViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ProductsViewHolder holder, int position) {
         ProductItem item = myList.get(position);
         holder.productName.setText(item.name);
 
-        //Todo change it to seller name
         holder.sellerName.setText(( item.sellerName));
         holder.categoryName.setText(item.category);
         holder.productPrice.setText(item.price+" JD");
@@ -65,7 +68,7 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
         return myList.size();
     }
 
-    class FeaturedViewHolder extends RecyclerView.ViewHolder{
+    class ProductsViewHolder extends RecyclerView.ViewHolder{
         ImageView productImg;
         TextView productName;
         TextView sellerName;
@@ -73,7 +76,7 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
         TextView productPrice;
 
 
-        public FeaturedViewHolder(@NonNull View itemView) {
+        public ProductsViewHolder(@NonNull View itemView) {
             super(itemView);
             productImg = itemView.findViewById(R.id.item_img);
             productName = itemView.findViewById(R.id.item_name);
@@ -82,7 +85,7 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
             categoryName = itemView.findViewById(R.id.item_category);
         }
     }
-    public interface IFeatured{
+    public interface IProducts {
         void onClick(ProductItem item);
     }
 }

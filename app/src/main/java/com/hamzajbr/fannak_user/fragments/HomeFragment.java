@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,18 +16,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hamzajbr.fannak_user.R;
+import com.hamzajbr.fannak_user.activities.AllProductsActivity;
 import com.hamzajbr.fannak_user.activities.CategoryActivity;
 import com.hamzajbr.fannak_user.activities.ProductActivity;
 import com.hamzajbr.fannak_user.adapters.BannersAdapter;
-import com.hamzajbr.fannak_user.adapters.FeaturedAdapter;
+import com.hamzajbr.fannak_user.adapters.ProductsAdapter;
 import com.hamzajbr.fannak_user.models.BannerItem;
 import com.hamzajbr.fannak_user.models.ProductItem;
 import com.hamzajbr.fannak_user.viewmodels.BannersViewModel;
 import com.hamzajbr.fannak_user.viewmodels.FeaturedViewModel;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,6 +39,13 @@ import butterknife.Unbinder;
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {
+
+
+    BannersAdapter bannersAdapter;
+    ProductsAdapter productsAdapter;
+
+    BannersViewModel bannersViewModel;
+    FeaturedViewModel featuredViewModel;
 
     private Unbinder unbinder;
     @BindView(R.id.banner_rv)
@@ -60,8 +66,27 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         unbinder = ButterKnife.bind(this,view);
 
-        initBannerRecycler(bannerRv,initBannerArrayList());
-        initFeaturedRecycler(featuredRv,initFeaturedArrayList());
+        bannersViewModel = ViewModelProviders.of(getActivity()).get(BannersViewModel.class);
+        bannersViewModel.init();
+        bannersViewModel.getBanners().observe(getViewLifecycleOwner(), bannerItems -> {
+            if(bannerItems!= null){
+                bannersAdapter.setBannersList((ArrayList<BannerItem>) bannerItems);
+            }
+        });
+
+        featuredViewModel = ViewModelProviders.of(getActivity()).get(FeaturedViewModel.class);
+        featuredViewModel.init();
+        featuredViewModel.getFeaturedProducts().observe(getViewLifecycleOwner(), productItems -> {
+            if(productItems!= null){
+                productsAdapter.setProducts((ArrayList<ProductItem>) productItems);
+            }
+
+        });
+
+
+
+        initBannerRecycler(bannerRv);
+        initFeaturedRecycler(featuredRv);
 
         return view;
     }
@@ -75,45 +100,35 @@ public class HomeFragment extends Fragment {
     }
 
 
-    private void initBannerRecycler(RecyclerView bannerRv, ArrayList<BannerItem> myList){
-        BannersAdapter adapter = new BannersAdapter(getContext(),myList,item -> {
+    private void initBannerRecycler(RecyclerView bannerRv){
+        bannersAdapter = new BannersAdapter(getContext(),item -> {
         });
         SnapHelper snapHelper = new LinearSnapHelper();
 
-        bannerRv.setAdapter(adapter);
+        bannerRv.setAdapter(bannersAdapter);
         bannerRv.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
         snapHelper.attachToRecyclerView(bannerRv);
-        adapter.notifyDataSetChanged();
+        bannersAdapter.notifyDataSetChanged();
     }
 
-    private ArrayList<BannerItem> initBannerArrayList(){
-        ArrayList<BannerItem> list = new ArrayList<>();
-        BannersViewModel bannersViewModel = ViewModelProviders.of(getActivity()).get(BannersViewModel.class);
-        bannersViewModel.init();
-        bannersViewModel.getBanners().observe(getViewLifecycleOwner(), bannerItems -> {
-            list.addAll(bannerItems);
-        });
 
-        return list;
-    }
-
-    private ArrayList<ProductItem> initFeaturedArrayList(){
-        ArrayList<ProductItem> list = new ArrayList<>();
-        FeaturedViewModel featuredViewModel = ViewModelProviders.of(getActivity()).get(FeaturedViewModel.class);
-        featuredViewModel.init();
-        featuredViewModel.getFeaturedProducts().observe(getViewLifecycleOwner(), productItems -> list.addAll(productItems));
-
-        return list;
-    }
-
-    private void initFeaturedRecycler(RecyclerView FeaturedRv, ArrayList<ProductItem> myList){
-        FeaturedAdapter adapter = new FeaturedAdapter(getContext(),myList,item -> {
+    private void initFeaturedRecycler(RecyclerView FeaturedRv){
+        productsAdapter = new ProductsAdapter(getContext(), item -> {
             Intent i = new Intent(getActivity(), ProductActivity.class);
             i.putExtra("product",item);
             startActivity(i);
         });
-        FeaturedRv.setAdapter(adapter);
+        FeaturedRv.setAdapter(productsAdapter);
         FeaturedRv.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
-        adapter.notifyDataSetChanged();
+        productsAdapter.notifyDataSetChanged();
     }
+
+    @OnClick({R.id.search_btn,R.id.all_items_btn})
+    void search(){
+        Intent i = new Intent(getActivity(), AllProductsActivity.class);
+        i.putExtra("search",0);
+        startActivity(i);
+
+    }
+
 }

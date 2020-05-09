@@ -23,13 +23,16 @@ import butterknife.ButterKnife;
 public class BannersAdapter extends RecyclerView.Adapter<BannersAdapter.BannersViewHolder> {
 
     private Context context;
-    private ArrayList<BannerItem> myList;
+    private ArrayList<BannerItem> myList = new ArrayList<>();
     private IBanner callback;
 
-    public BannersAdapter(Context context, ArrayList<BannerItem> myList, IBanner callback) {
+    public BannersAdapter(Context context,  IBanner callback) {
         this.context = context;
-        this.myList = myList;
         this.callback = callback;
+    }
+    public void setBannersList(ArrayList<BannerItem> myList){
+        this.myList = myList;
+        notifyDataSetChanged();
     }
 
 

@@ -17,13 +17,16 @@ import java.util.ArrayList;
 public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.SubCategoryViewHolder> {
 
     Context context;
-    ArrayList<SubCategoryItem> items;
+    ArrayList<SubCategoryItem> items = new ArrayList<>();
     ISubCategory callback;
 
-    public SubCategoryAdapter(Context context, ArrayList<SubCategoryItem> items, ISubCategory callback) {
+    public SubCategoryAdapter(Context context,  ISubCategory callback) {
         this.context = context;
-        this.items = items;
         this.callback = callback;
+    }
+    public void setItems(ArrayList<SubCategoryItem> items){
+       this.items = items;
+       notifyDataSetChanged();
     }
 
     @NonNull

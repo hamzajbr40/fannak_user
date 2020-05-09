@@ -67,7 +67,7 @@ public interface APIManager {
     Call<BaseResponse<List<ProductItem>>> searchItem(@Body SearchByTypeRequest body);
 
     //Get all Products
-    @POST("searchItem")
+    @GET("searchItem")
     Call<BaseResponse<List<ProductItem>>> getAllProducts();
 
 }

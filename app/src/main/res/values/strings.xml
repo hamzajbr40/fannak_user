@@ -50,4 +50,7 @@
     <string name="select_product_category_type">Select Product category type</string>
     <string name="select_one_of_these_sub_categories">select one of these sub categories</string>
     <string name="order">Order</string>
+    <string name="see_all_handcrafts">See All Handcrafts</string>
+    <string name="see_all_arts">See All Arts</string>
+    <string name="search_hint">Search...</string>
 </resources>

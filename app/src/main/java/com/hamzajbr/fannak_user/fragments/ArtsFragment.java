@@ -1,5 +1,6 @@
 package com.hamzajbr.fannak_user.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hamzajbr.fannak_user.R;
+import com.hamzajbr.fannak_user.activities.AllProductsActivity;
 import com.hamzajbr.fannak_user.adapters.SubCategoryAdapter;
 import com.hamzajbr.fannak_user.models.CategoryItem;
 import com.hamzajbr.fannak_user.models.SubCategoryItem;
@@ -23,6 +25,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,6 +34,8 @@ public class ArtsFragment extends Fragment {
 
     @BindView(R.id.arts_sub_category_rv)
     RecyclerView artsRv;
+    SubCategoryAdapter adapter;
+    CategoriesViewModel categoriesViewModel;
 
     public ArtsFragment() {
         // Required empty public constructor
@@ -46,31 +51,41 @@ public class ArtsFragment extends Fragment {
 
         initArtsRecycler();
 
+
+        categoriesViewModel = ViewModelProviders.of(getActivity()).get(CategoriesViewModel.class);
+        categoriesViewModel.init();
+        categoriesViewModel.getAllCategories().observe(getViewLifecycleOwner(), new Observer<List<CategoryItem>>() {
+            @Override
+            public void onChanged(List<CategoryItem> categoryItems) {
+                adapter.setItems((ArrayList<SubCategoryItem>) categoryItems.get(0).subCategoryList);
+            }
+        });
+
+
+
+
         return v;
     }
 
     void initArtsRecycler(){
-        SubCategoryAdapter adapter = new SubCategoryAdapter(getContext(), initArtsArrayLIst(), new SubCategoryAdapter.ISubCategory() {
-            @Override
-            public void onClick(SubCategoryItem item) {
-
-            }
+        adapter = new SubCategoryAdapter(getContext(), item -> {
+            Intent i = new Intent(getActivity(), AllProductsActivity.class);
+            i.putExtra("search",2);
+            i.putExtra("type",item.label);
+            startActivity(i);
         });
         artsRv.setAdapter(adapter);
         artsRv.setLayoutManager(new GridLayoutManager(getContext(),2));
         adapter.notifyDataSetChanged();
     }
-    ArrayList<SubCategoryItem> initArtsArrayLIst(){
-        ArrayList<SubCategoryItem> list = new ArrayList<>();
-        CategoriesViewModel categoriesViewModel = ViewModelProviders.of(getActivity()).get(CategoriesViewModel.class);
-        categoriesViewModel.init();
-        categoriesViewModel.getAllCategories().observe(getViewLifecycleOwner(), new Observer<List<CategoryItem>>() {
-            @Override
-            public void onChanged(List<CategoryItem> categoryItems) {
-                list.addAll(categoryItems.get(0).subCategoryList);
-            }
-        });
-        return list;
+
+    @OnClick(R.id.all_arts_btn)
+    void seeAllHandcraftsProducts(){
+        Intent i = new Intent(getActivity(), AllProductsActivity.class);
+        i.putExtra("search",1);
+        i.putExtra("category","Arts");
+        startActivity(i);
     }
+
 
 }

@@ -44,12 +44,16 @@ public class SignUpActivity extends AppCompatActivity {
     @BindView(R.id.confirm_pass_card)
     MaterialCardView confirmPassCard;
 
+    SignUpViewModel signUpViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);
+        signUpViewModel = ViewModelProviders.of(this).get(SignUpViewModel.class);
+
+
 
 
         //for card stroke color indicator
@@ -143,12 +147,17 @@ public class SignUpActivity extends AppCompatActivity {
     void signUp(View view){
 
         if(isDataAreValid()){
-            SignUpViewModel signUpViewModel = ViewModelProviders.of(this).get(SignUpViewModel.class);
+
             signUpViewModel.init(createSignUpRequest());
             signUpViewModel.getResponse().observe(this, new Observer<BaseResponse>() {
                 @Override
                 public void onChanged(BaseResponse baseResponse) {
-
+                    if(baseResponse.executionSuccessful){
+                        Utils.goToActivity(SignUpActivity.this,LoginActivity.class,true);
+                    }
+                    else {
+                        Toast.makeText(SignUpActivity.this,baseResponse.message,Toast.LENGTH_SHORT).show();
+                    }
 
                 }
             });
