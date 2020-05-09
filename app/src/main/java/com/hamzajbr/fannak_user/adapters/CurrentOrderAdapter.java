@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.android.material.button.MaterialButton;
 import com.hamzajbr.fannak_user.R;
-import com.hamzajbr.fannak_user.models.CurrentOrderItem;
 import com.hamzajbr.fannak_user.models.ProductItem;
 
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ import java.util.ArrayList;
 public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapter.CurrentOrderViewHolder> {
 
     private Context context;
-    private ArrayList<CurrentOrderItem> myList = new ArrayList<>();
+    private ArrayList<ProductItem> myList = new ArrayList<>();
     private IComplete callback;
 
     public CurrentOrderAdapter(Context context, IComplete callback) {
@@ -30,7 +29,7 @@ public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapte
         this.callback = callback;
     }
 
-    public void setCurrentOrders( ArrayList<CurrentOrderItem> myList){
+    public void setCurrentOrders( ArrayList<ProductItem> myList){
         this.myList = myList;
         notifyDataSetChanged();
     }
@@ -48,7 +47,7 @@ public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapte
 
     @Override
     public void onBindViewHolder(@NonNull CurrentOrderViewHolder holder, int position) {
-        CurrentOrderItem item = myList.get(position);
+        ProductItem item = myList.get(position);
         holder.productName.setText(item.name);
 
         holder.sellerName.setText(( item.sellerName));
@@ -92,7 +91,7 @@ public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapte
         }
     }
     public interface IComplete{
-        void onClick(CurrentOrderItem item);
+        void onClick(ProductItem item);
     }
 
 }

@@ -8,7 +8,6 @@ import androidx.lifecycle.MutableLiveData;
 import com.hamzajbr.fannak_user.managers.RestClient;
 import com.hamzajbr.fannak_user.models.requests.SignupRequest;
 import com.hamzajbr.fannak_user.models.responses.BaseResponse;
-import com.hamzajbr.fannak_user.models.responses.BasicResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,14 +22,14 @@ public class SignUpRepository {
         }
         return signUpRepository;
     }
-    public LiveData<BasicResponse> signUp(SignupRequest request){
-        MutableLiveData<BasicResponse> responseData = new MutableLiveData<>();
-        BasicResponse baseResponse = new BasicResponse();
+    public LiveData<BaseResponse> signUp(SignupRequest request){
+        MutableLiveData<BaseResponse> responseData = new MutableLiveData<>();
+        BaseResponse baseResponse = new BaseResponse();
 
-        Call<BasicResponse> call = RestClient.getService().signup(request);
-        call.enqueue(new Callback<BasicResponse>() {
+        Call<BaseResponse> call = RestClient.getService().signup(request);
+        call.enqueue(new Callback<BaseResponse>() {
             @Override
-            public void onResponse(Call<BasicResponse> call, Response<BasicResponse> response) {
+            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
                 if (response.isSuccessful()){
                     baseResponse.message = response.body().message;
                     baseResponse.executionSuccessful = response.body().executionSuccessful;
@@ -39,7 +38,7 @@ public class SignUpRepository {
             }
 
             @Override
-            public void onFailure(Call<BasicResponse> call, Throwable t) {
+            public void onFailure(Call<BaseResponse> call, Throwable t) {
                 Log.e("onFailure","SIGN UP API CALL FAIL",t);
             }
         });

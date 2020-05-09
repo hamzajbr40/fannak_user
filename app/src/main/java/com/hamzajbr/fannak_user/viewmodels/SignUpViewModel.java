@@ -7,11 +7,10 @@ import androidx.lifecycle.ViewModel;
 
 import com.hamzajbr.fannak_user.models.requests.SignupRequest;
 import com.hamzajbr.fannak_user.models.responses.BaseResponse;
-import com.hamzajbr.fannak_user.models.responses.BasicResponse;
 import com.hamzajbr.fannak_user.repositories.SignUpRepository;
 
 public class SignUpViewModel extends ViewModel {
-    private LiveData<BasicResponse> response;
+    private LiveData<BaseResponse> response;
     private SignUpRepository signUpRepository;
 
 
@@ -25,7 +24,7 @@ public class SignUpViewModel extends ViewModel {
         }
     }
 
-    public LiveData<BasicResponse> getResponse(){
+    public LiveData<BaseResponse> getResponse(){
         return response;
     }
 
