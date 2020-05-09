@@ -2,6 +2,7 @@ package com.hamzajbr.fannak_user.managers;
 
 import com.hamzajbr.fannak_user.models.BannerItem;
 import com.hamzajbr.fannak_user.models.CategoryItem;
+import com.hamzajbr.fannak_user.models.CurrentOrderItem;
 import com.hamzajbr.fannak_user.models.ProductItem;
 import com.hamzajbr.fannak_user.models.SellerItem;
 import com.hamzajbr.fannak_user.models.requests.LoginRequest;
@@ -10,16 +11,12 @@ import com.hamzajbr.fannak_user.models.requests.SearchByNameRequest;
 import com.hamzajbr.fannak_user.models.requests.SearchByTypeRequest;
 import com.hamzajbr.fannak_user.models.requests.SignupRequest;
 import com.hamzajbr.fannak_user.models.responses.BaseResponse;
+import com.hamzajbr.fannak_user.models.responses.BasicResponse;
 import com.hamzajbr.fannak_user.models.responses.LoginResponse;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -34,7 +31,7 @@ public interface APIManager {
     Call<BaseResponse<LoginResponse>> login(@Body LoginRequest body);
 
     @POST("customerSignup")
-    Call<BaseResponse> signup(@Body SignupRequest body);
+    Call<BasicResponse> signup(@Body SignupRequest body);
 
     @GET("getBanner")
     Call<BaseResponse<List<BannerItem>>> getBanner();
@@ -48,8 +45,14 @@ public interface APIManager {
     @POST("getSellerById")
     Call<BaseResponse<SellerItem>> getSellerByID(@Query("Id") int id);
 
+    @POST("addOrder")
+    Call<BasicResponse> addOrder(@Query("item_id")int itemId,@Query("item_buyer")int itemBuyer);
+
+    @POST("completeOrder")
+    Call<BasicResponse> completeOrder(@Query("order_id")int orderId);
+
     @POST("getCurrentOrders")
-    Call<BaseResponse<List<ProductItem>>> getCurrentOrders(@Query("Id") int id);
+    Call<BaseResponse<List<CurrentOrderItem>>> getCurrentOrders(@Query("Id") int id);
 
     @POST("getPreviousOrders")
     Call<BaseResponse<List<ProductItem>>> getPreviousOrders(@Query("Id") int id);
