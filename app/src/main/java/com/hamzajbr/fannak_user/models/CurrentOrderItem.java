@@ -2,9 +2,7 @@ package com.hamzajbr.fannak_user.models;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-
-public class ProductItem implements Serializable {
+public class CurrentOrderItem {
     @SerializedName("Item_Name")
     public String name;
     @SerializedName("Item_Type")
@@ -19,9 +17,11 @@ public class ProductItem implements Serializable {
     public int itemID;
     @SerializedName("Item_Description")
     public String description;
+    @SerializedName("Order_id")
+    public int orderId;
     @SerializedName("Item_Image")
     public String image;
     @SerializedName("Item_Price")
     public int price;
-    
+
 }
