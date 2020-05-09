@@ -27,6 +27,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,6 +37,7 @@ public class CurrentOrdersFragment extends Fragment {
     @BindView(R.id.current_order_rv)
     RecyclerView currentOrdersRv;
 
+    Unbinder unbinder;
     CurrentOrderAdapter adapter;
 
     CurrentOrderViewModel currentOrderViewModel;
@@ -51,7 +53,7 @@ public class CurrentOrdersFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_current_orders, container, false);
-        ButterKnife.bind(this,v);
+        unbinder =  ButterKnife.bind(this,v);
 
         completeOrderViewModel = ViewModelProviders.of(this).get(CompleteOrderViewModel.class);
         currentOrderViewModel = ViewModelProviders.of(this).get(CurrentOrderViewModel.class);

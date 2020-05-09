@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.SnapHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.hamzajbr.fannak_user.R;
 import com.hamzajbr.fannak_user.activities.AllProductsActivity;
@@ -23,6 +24,7 @@ import com.hamzajbr.fannak_user.adapters.BannersAdapter;
 import com.hamzajbr.fannak_user.adapters.ProductsAdapter;
 import com.hamzajbr.fannak_user.models.BannerItem;
 import com.hamzajbr.fannak_user.models.ProductItem;
+import com.hamzajbr.fannak_user.utilities.Utils;
 import com.hamzajbr.fannak_user.viewmodels.BannersViewModel;
 import com.hamzajbr.fannak_user.viewmodels.FeaturedViewModel;
 
@@ -47,6 +49,9 @@ public class HomeFragment extends Fragment {
     BannersViewModel bannersViewModel;
     FeaturedViewModel featuredViewModel;
 
+    @BindView(R.id.name_tv)
+    TextView userName;
+
     private Unbinder unbinder;
     @BindView(R.id.banner_rv)
     RecyclerView bannerRv;
@@ -65,6 +70,10 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         unbinder = ButterKnife.bind(this,view);
+
+        String name = Utils.getValue(getContext(),"name","Guest");
+        userName.setText(name);
+
 
         bannersViewModel = ViewModelProviders.of(getActivity()).get(BannersViewModel.class);
         bannersViewModel.init();

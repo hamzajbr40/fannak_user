@@ -26,11 +26,14 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class ArtsFragment extends Fragment {
+
+    Unbinder unbinder;
 
     @BindView(R.id.arts_sub_category_rv)
     RecyclerView artsRv;
@@ -47,7 +50,7 @@ public class ArtsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_arts, container, false);
-        ButterKnife.bind(this,v);
+        unbinder = ButterKnife.bind(this,v);
 
         initArtsRecycler();
 

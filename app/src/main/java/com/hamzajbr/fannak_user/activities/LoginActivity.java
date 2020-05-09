@@ -75,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     String name = loginResponseBaseResponse.data.name;
                     int id = loginResponseBaseResponse.data.id;
+                    Utils.setValue(LoginActivity.this,"email",emailEt.getText().toString());
                     Utils.setValue(LoginActivity.this,"name",name);
                     Utils.setValue(LoginActivity.this,"id",name);
                     Utils.setValue(LoginActivity.this,"signed in",true);

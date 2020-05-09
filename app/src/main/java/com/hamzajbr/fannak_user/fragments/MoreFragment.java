@@ -10,10 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.button.MaterialButton;
 import com.hamzajbr.fannak_user.R;
 import com.hamzajbr.fannak_user.activities.AboutUsActivity;
 import com.hamzajbr.fannak_user.activities.AccountActivity;
 import com.hamzajbr.fannak_user.activities.ContactUsActivity;
+import com.hamzajbr.fannak_user.activities.LoginActivity;
 import com.hamzajbr.fannak_user.adapters.OptionsAdapter;
 import com.hamzajbr.fannak_user.models.OptionItem;
 import com.hamzajbr.fannak_user.utilities.Utils;
@@ -22,6 +24,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -32,6 +35,10 @@ public class MoreFragment extends Fragment {
     private Unbinder unbinder;
     @BindView(R.id.more_options_rv)
     RecyclerView optionsRv;
+    @BindView(R.id.logout_btn)
+    MaterialButton logoutBtn;
+
+    boolean signedIn;
 
 
     public MoreFragment() {
@@ -44,6 +51,12 @@ public class MoreFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_more, container, false);
         unbinder = ButterKnife.bind(this,view);
+        signedIn = Utils.getValue(getContext(),"signed in",true);
+        if (signedIn){
+            logoutBtn.setVisibility(View.VISIBLE);
+        }else {
+            logoutBtn.setVisibility(View.GONE);
+        }
 
         initOptionsRecycler();
 
@@ -57,7 +70,10 @@ public class MoreFragment extends Fragment {
             public void onClick(OptionItem item) {
                 switch (item.icon){
                     case R.drawable.ic_account:
-                        Utils.goToActivity(getActivity(), AccountActivity.class,false);
+                        if(signedIn)
+                            Utils.goToActivity(getActivity(), AccountActivity.class,false);
+                        else
+                            Utils.goToActivity(getActivity(), LoginActivity.class,true);
                         break;
                     case R.drawable.ic_about_us:
                         Utils.goToActivity(getActivity(), AboutUsActivity.class,false);
@@ -96,6 +112,11 @@ public class MoreFragment extends Fragment {
         optionItems.add(item);
 
         return optionItems;
+    }
+    @OnClick(R.id.logout_btn)
+    void Logout(){
+        Utils.setValue(getContext(),"signed in",false);
+        Utils.goToActivity(getActivity(),LoginActivity.class,true);
     }
 
 }

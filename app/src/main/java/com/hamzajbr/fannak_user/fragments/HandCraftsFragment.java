@@ -26,6 +26,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +35,7 @@ public class HandCraftsFragment extends Fragment {
 
     @BindView(R.id.handcrafts_sub_category_rv)
     RecyclerView handcraftsRv;
+    Unbinder unbinder;
 
     SubCategoryAdapter adapter;
     CategoriesViewModel categoriesViewModel;
@@ -48,7 +50,7 @@ public class HandCraftsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_hand_crafts, container, false);
-        ButterKnife.bind(this,v);
+        unbinder = ButterKnife.bind(this,v);
 
         initHandcraftsRecycler();
         categoriesViewModel = ViewModelProviders.of(getActivity()).get(CategoriesViewModel.class);

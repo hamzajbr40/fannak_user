@@ -23,12 +23,14 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class PrevOrdersFragment extends Fragment {
 
+    Unbinder unbinder;
     @BindView(R.id.prev_order_rv)
     RecyclerView prevOrdersRv;
 
@@ -46,7 +48,7 @@ public class PrevOrdersFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_prev_orders, container, false);
-        ButterKnife.bind(this,view);
+        unbinder = ButterKnife.bind(this,view);
         previousOrderViewModel = ViewModelProviders.of(this).get(PreviousOrderViewModel.class);
         int id = Utils.getValue(getContext(),"id",0);
         previousOrderViewModel.init(id);
