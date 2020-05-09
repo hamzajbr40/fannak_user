@@ -1,22 +1,16 @@
 package com.hamzajbr.fannak_user.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.hamzajbr.fannak_user.R;
 import com.hamzajbr.fannak_user.models.ProductItem;
-import com.hamzajbr.fannak_user.models.responses.BasicResponse;
-import com.hamzajbr.fannak_user.utilities.Utils;
-import com.hamzajbr.fannak_user.viewmodels.AddOrderViewModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,7 +18,7 @@ import butterknife.OnClick;
 
 public class ProductActivity extends AppCompatActivity {
 
-    private int itemId;
+    private int id;
     @BindView(R.id.product_name_tv)
     TextView productName;
     @BindView(R.id.seller_name_tv)
@@ -38,8 +32,6 @@ public class ProductActivity extends AppCompatActivity {
     @BindView(R.id.product_img)
     ImageView productImg;
 
-    AddOrderViewModel addOrderViewModel;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +39,7 @@ public class ProductActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product);
         ButterKnife.bind(this);
         ProductItem item = (ProductItem) getIntent().getExtras().get("product");
-        itemId = item.itemID;
-        addOrderViewModel = ViewModelProviders.of(this).get(AddOrderViewModel.class);
-
-
-
+        id = item.itemID;
 
         initData(item);
 
@@ -71,34 +59,5 @@ public class ProductActivity extends AppCompatActivity {
         Glide.with(this).load(imageByteArray).into(productImg);
 
     }
-
-    @OnClick(R.id.order_btn)
-    void addOrder(View view){
-        boolean signedIn = Utils.getValue(this,"signed in",true);
-        if (signedIn){
-            int buyerId = Utils.getValue(this,"id",0);
-            addOrderViewModel.init(itemId,buyerId);
-            addOrderViewModel.getResponse().observe(this, new Observer<BasicResponse>() {
-                @Override
-                public void onChanged(BasicResponse basicResponse) {
-                    if(basicResponse.executionSuccessful){
-                        Toast.makeText(ProductActivity.this,"Added Successfully",Toast.LENGTH_SHORT).show();
-                        finish();
-                    }else {
-                        Toast.makeText(ProductActivity.this,basicResponse.message,Toast.LENGTH_SHORT).show();
-
-                    }
-                }
-            });
-
-
-        }else {
-
-        }
-
-
-    }
-
-
 
 }

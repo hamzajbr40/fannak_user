@@ -19,6 +19,7 @@ public class ProductItem implements Serializable {
     public int itemID;
     @SerializedName("Item_Description")
     public String description;
+    //TODO change image from String to array
     @SerializedName("Item_Image")
     public String image;
     @SerializedName("Item_Price")
