@@ -5,6 +5,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -25,8 +27,6 @@ import static com.hamzajbr.fannak_user.utilities.Utils.isEmpty;
 
 public class LoginActivity extends AppCompatActivity {
 
-    @BindView(R.id.sign_up_btn)
-    MaterialButton signUpBtn;
     @BindView(R.id.email_et)
     EditText emailEt;
     @BindView(R.id.password_et)
@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     MaterialCardView emailCard;
     @BindView(R.id.password_card)
     MaterialCardView passwordCard;
-    LoginViewModel loginViewModel;
+    private LoginViewModel loginViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,39 +66,47 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.sign_in_btn)
-    void signIn(View view) {
-        if (isDataAreValid()){
+    void signIn() {
+        if (isDataAreValid()) {
+
             loginViewModel.init(createLoginRequest());
             loginViewModel.getResponse().observe(this, new Observer<BaseResponse<LoginResponse>>() {
                 @Override
                 public void onChanged(BaseResponse<LoginResponse> loginResponseBaseResponse) {
+                    int id = 10;
+                    if(loginResponseBaseResponse.executionSuccessful) {
 
-                    String name = loginResponseBaseResponse.data.name;
-                    int id = loginResponseBaseResponse.data.id;
-                    Utils.setValue(LoginActivity.this,"email",emailEt.getText().toString());
-                    Utils.setValue(LoginActivity.this,"name",name);
-                    Utils.setValue(LoginActivity.this,"id",name);
-                    Utils.setValue(LoginActivity.this,"signed in",true);
-                    Utils.goToActivity(LoginActivity.this,MainActivity.class,true);
+                        if(loginResponseBaseResponse.data!=null) {
+                            String name = loginResponseBaseResponse.data.name;
+                            //id = loginResponseBaseResponse.data.id;
+                            Utils.setValue(LoginActivity.this, "email", emailEt.getText().toString());
+                            Utils.setValue(LoginActivity.this, "name", name);
+                            Utils.setValue(LoginActivity.this, "userId", id);
+                            Log.i("id","id = "+loginResponseBaseResponse.data.id);
+                            Utils.setValue(LoginActivity.this, "signed in", true);
+                            Utils.goToActivity(LoginActivity.this, MainActivity.class, true);
+                        }
+                    }
                 }
             });
         }
     }
-    private LoginRequest createLoginRequest(){
+
+    private LoginRequest createLoginRequest() {
         LoginRequest request = new LoginRequest();
         request.email = emailEt.getText().toString();
         request.password = passwordEt.getText().toString();
         return request;
     }
 
-    private boolean isDataAreValid(){
+    private boolean isDataAreValid() {
         boolean v = true;
-        if(Utils.isEmail(emailEt)==false){
+        if (!Utils.isEmail(emailEt)) {
             emailEt.setError("Enter your email!");
             emailCard.setStrokeColor(getResources().getColor(R.color.error));
             v = false;
         }
-        if (isEmpty(passwordEt)){
+        if (isEmpty(passwordEt)) {
             passwordEt.setError("Enter your password");
             passwordCard.setStrokeColor(getResources().getColor(R.color.error));
             v = false;
@@ -109,14 +117,16 @@ public class LoginActivity extends AppCompatActivity {
 
 
     @OnClick(R.id.sign_up_btn)
-    void signUp(View view){
-        Utils.goToActivity(this,SignUpActivity.class,false);
+    void signUp() {
+        Utils.goToActivity(this, SignUpActivity.class, false);
     }
 
     @OnClick(R.id.guest_btn)
-    void guest(View view){
-        Utils.setValue(this,"signed in",false);
-        Utils.goToActivity(this,MainActivity.class,false);
+    void guest() {
+        Utils.setValue(LoginActivity.this, "name", "Guest");
+
+        Utils.setValue(this, "signed in", false);
+        Utils.goToActivity(this, MainActivity.class, false);
     }
 
 }

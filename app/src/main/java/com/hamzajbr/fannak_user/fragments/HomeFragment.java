@@ -43,11 +43,11 @@ import butterknife.Unbinder;
 public class HomeFragment extends Fragment {
 
 
-    BannersAdapter bannersAdapter;
-    ProductsAdapter productsAdapter;
+    private BannersAdapter bannersAdapter;
+    private ProductsAdapter productsAdapter;
 
-    BannersViewModel bannersViewModel;
-    FeaturedViewModel featuredViewModel;
+    private BannersViewModel bannersViewModel;
+    private FeaturedViewModel featuredViewModel;
 
     @BindView(R.id.name_tv)
     TextView userName;
@@ -94,8 +94,8 @@ public class HomeFragment extends Fragment {
 
 
 
-        initBannerRecycler(bannerRv);
-        initFeaturedRecycler(featuredRv);
+        initBannerRecycler();
+        initFeaturedRecycler();
 
         return view;
     }
@@ -109,7 +109,7 @@ public class HomeFragment extends Fragment {
     }
 
 
-    private void initBannerRecycler(RecyclerView bannerRv){
+    private void initBannerRecycler(){
         bannersAdapter = new BannersAdapter(getContext(),item -> {
         });
         SnapHelper snapHelper = new LinearSnapHelper();
@@ -121,14 +121,14 @@ public class HomeFragment extends Fragment {
     }
 
 
-    private void initFeaturedRecycler(RecyclerView FeaturedRv){
+    private void initFeaturedRecycler(){
         productsAdapter = new ProductsAdapter(getContext(), item -> {
             Intent i = new Intent(getActivity(), ProductActivity.class);
             i.putExtra("product",item);
             startActivity(i);
         });
-        FeaturedRv.setAdapter(productsAdapter);
-        FeaturedRv.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        featuredRv.setAdapter(productsAdapter);
+        featuredRv.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
         productsAdapter.notifyDataSetChanged();
     }
 

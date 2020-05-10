@@ -18,8 +18,8 @@ import butterknife.OnClick;
 
 public class CategoryActivity extends AppCompatActivity {
 
-    ArtsFragment artsFragment = new ArtsFragment();
-    HandCraftsFragment handCraftsFragment = new HandCraftsFragment();
+    private ArtsFragment artsFragment = new ArtsFragment();
+    private HandCraftsFragment handCraftsFragment = new HandCraftsFragment();
 
     @BindView(R.id.arts_category_card)
     MaterialCardView artsCard;
@@ -55,7 +55,7 @@ public class CategoryActivity extends AppCompatActivity {
     void back(){onBackPressed(); finish();}
 
     @OnClick({R.id.handcrafts_category_card,R.id.arts_category_card})
-    public void tabs(View card){
+    void tabs(View card){
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         if(card.getId() == R.id.arts_category_card){
             artsCard.setStrokeColor(getResources().getColor(R.color.colorPrimary));

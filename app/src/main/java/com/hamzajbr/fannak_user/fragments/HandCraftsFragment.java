@@ -37,8 +37,8 @@ public class HandCraftsFragment extends Fragment {
     RecyclerView handcraftsRv;
     Unbinder unbinder;
 
-    SubCategoryAdapter adapter;
-    CategoriesViewModel categoriesViewModel;
+    private SubCategoryAdapter adapter;
+    private CategoriesViewModel categoriesViewModel;
 
     public HandCraftsFragment() {
         // Required empty public constructor
@@ -65,7 +65,7 @@ public class HandCraftsFragment extends Fragment {
         return v;
     }
 
-    void initHandcraftsRecycler(){
+    private void initHandcraftsRecycler(){
         adapter = new SubCategoryAdapter(getContext(), item -> {
             Intent i = new Intent(getActivity(), AllProductsActivity.class);
             i.putExtra("search",2);

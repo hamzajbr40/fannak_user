@@ -32,8 +32,11 @@ public class LanguageActivity extends AppCompatActivity {
     @OnClick(R.id.next_btn)
     void next(View v){
         //TODO check and set selected lang here
-
-        Utils.goToActivity(this,LoginActivity.class,false);
-
+        boolean signedIn = Utils.getValue(this,"signed in",false);
+        if(signedIn){
+            Utils.goToActivity(this,MainActivity.class,true);
+        }else {
+            Utils.goToActivity(this, LoginActivity.class, true);
+        }
     }
 }

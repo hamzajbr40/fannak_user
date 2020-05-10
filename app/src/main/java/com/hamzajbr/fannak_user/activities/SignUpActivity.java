@@ -16,6 +16,7 @@ import com.google.android.material.card.MaterialCardView;
 import com.hamzajbr.fannak_user.R;
 import com.hamzajbr.fannak_user.models.requests.SignupRequest;
 import com.hamzajbr.fannak_user.models.responses.BaseResponse;
+import com.hamzajbr.fannak_user.models.responses.BasicResponse;
 import com.hamzajbr.fannak_user.utilities.Utils;
 import com.hamzajbr.fannak_user.viewmodels.SignUpViewModel;
 
@@ -44,7 +45,7 @@ public class SignUpActivity extends AppCompatActivity {
     @BindView(R.id.confirm_pass_card)
     MaterialCardView confirmPassCard;
 
-    SignUpViewModel signUpViewModel;
+    private SignUpViewModel signUpViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,22 +145,19 @@ public class SignUpActivity extends AppCompatActivity {
 
 
     @OnClick(R.id.sign_up_btn)
-    void signUp(View view){
+    void signUp(){
 
         if(isDataAreValid()){
 
             signUpViewModel.init(createSignUpRequest());
-            signUpViewModel.getResponse().observe(this, new Observer<BaseResponse>() {
-                @Override
-                public void onChanged(BaseResponse baseResponse) {
-                    if(baseResponse.executionSuccessful){
-                        Utils.goToActivity(SignUpActivity.this,LoginActivity.class,true);
-                    }
-                    else {
-                        Toast.makeText(SignUpActivity.this,baseResponse.message,Toast.LENGTH_SHORT).show();
-                    }
-
+            signUpViewModel.getResponse().observe(this, baseResponse -> {
+                if(baseResponse.executionSuccessful){
+                    Utils.goToActivity(SignUpActivity.this,LoginActivity.class,true);
                 }
+                else {
+                    Toast.makeText(SignUpActivity.this,baseResponse.message,Toast.LENGTH_SHORT).show();
+                }
+
             });
 
 

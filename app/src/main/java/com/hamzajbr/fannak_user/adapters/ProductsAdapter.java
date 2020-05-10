@@ -29,7 +29,8 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         this.callback = callback;
     }
     public void setProducts( ArrayList<ProductItem> myList){
-        this.myList = myList;
+        if(myList!=null)
+            this.myList = myList;
         notifyDataSetChanged();
     }
 

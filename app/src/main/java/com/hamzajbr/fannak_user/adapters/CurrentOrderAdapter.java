@@ -68,7 +68,10 @@ public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapte
 
     @Override
     public int getItemCount() {
-        return myList.size();
+        if(myList != null) {
+            return myList.size();
+        }else
+            return 0;
     }
 
     class CurrentOrderViewHolder extends RecyclerView.ViewHolder {

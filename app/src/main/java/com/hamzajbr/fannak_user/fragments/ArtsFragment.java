@@ -33,12 +33,12 @@ import butterknife.Unbinder;
  */
 public class ArtsFragment extends Fragment {
 
-    Unbinder unbinder;
+    private Unbinder unbinder;
 
     @BindView(R.id.arts_sub_category_rv)
     RecyclerView artsRv;
-    SubCategoryAdapter adapter;
-    CategoriesViewModel categoriesViewModel;
+    private SubCategoryAdapter adapter;
+    private CategoriesViewModel categoriesViewModel;
 
     public ArtsFragment() {
         // Required empty public constructor
@@ -70,7 +70,7 @@ public class ArtsFragment extends Fragment {
         return v;
     }
 
-    void initArtsRecycler(){
+    private void initArtsRecycler(){
         adapter = new SubCategoryAdapter(getContext(), item -> {
             Intent i = new Intent(getActivity(), AllProductsActivity.class);
             i.putExtra("search",2);
@@ -83,7 +83,7 @@ public class ArtsFragment extends Fragment {
     }
 
     @OnClick(R.id.all_arts_btn)
-    void seeAllHandcraftsProducts(){
+    void seeAllArtsProducts(){
         Intent i = new Intent(getActivity(), AllProductsActivity.class);
         i.putExtra("search",1);
         i.putExtra("category","Arts");

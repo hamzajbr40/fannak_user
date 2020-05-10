@@ -197,7 +197,7 @@ public class Utils {
 
     public static synchronized void setValue(Context context, String key, int value) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        prefs.edit().putInt(key, value).commit();
+        prefs.edit().putInt(key, value).apply();
     }
 
     public static synchronized int getValue(Context context, String key, int defaultValue) {

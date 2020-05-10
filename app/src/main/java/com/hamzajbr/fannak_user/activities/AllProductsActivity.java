@@ -16,6 +16,7 @@ import com.hamzajbr.fannak_user.R;
 import com.hamzajbr.fannak_user.adapters.ProductsAdapter;
 import com.hamzajbr.fannak_user.models.ProductItem;
 import com.hamzajbr.fannak_user.models.requests.SearchByCategoryRequest;
+import com.hamzajbr.fannak_user.models.requests.SearchByNameRequest;
 import com.hamzajbr.fannak_user.models.requests.SearchByTypeRequest;
 import com.hamzajbr.fannak_user.viewmodels.SearchViewModel;
 
@@ -24,15 +25,16 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class AllProductsActivity extends AppCompatActivity {
     @BindView(R.id.products_rv)
     RecyclerView productsRv;
     @BindView(R.id.search_et)
     EditText searchEt;
-    SearchViewModel searchViewModel;
+    private SearchViewModel searchViewModel;
 
-    ProductsAdapter adapter;
+    private ProductsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,23 +91,23 @@ public class AllProductsActivity extends AppCompatActivity {
 
 
 
-        searchEt.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                adapter.notifyDataSetChanged();
-            }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                adapter.notifyDataSetChanged();
-            }
 
+
+    }
+    @OnClick(R.id.search_btn)
+    void search(){
+        String searchKey = searchEt.getText().toString();
+        SearchByNameRequest request = new SearchByNameRequest();
+        request.name = searchKey;
+        searchViewModel.init(request);
+        searchViewModel.getSearchedResult().observe(this, new Observer<List<ProductItem>>() {
             @Override
-            public void afterTextChanged(Editable s) {
-                adapter.notifyDataSetChanged();
+            public void onChanged(List<ProductItem> productItems) {
+                if (productItems!=null)
+                    adapter.setProducts((ArrayList<ProductItem>) productItems);
             }
         });
-
 
     }
 

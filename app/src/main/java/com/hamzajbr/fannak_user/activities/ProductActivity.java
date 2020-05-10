@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
 import android.util.Base64;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,7 +37,7 @@ public class ProductActivity extends AppCompatActivity {
     @BindView(R.id.product_img)
     ImageView productImg;
 
-    AddOrderViewModel addOrderViewModel;
+    private AddOrderViewModel addOrderViewModel;
 
 
     @Override
@@ -57,10 +56,13 @@ public class ProductActivity extends AppCompatActivity {
 
 
     }
+
+
     @OnClick(R.id.back_btn)
-    public void back(View view){
+    public void back(){
         onBackPressed();
     }
+
     private void initData(ProductItem item){
         productName.setText(item.name);
         sellerName.setText(item.sellerName);
@@ -73,7 +75,7 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.order_btn)
-    void addOrder(View view){
+    void addOrder(){
         boolean signedIn = Utils.getValue(this,"signed in",true);
         if (signedIn){
             int buyerId = Utils.getValue(this,"id",0);
@@ -93,6 +95,7 @@ public class ProductActivity extends AppCompatActivity {
 
 
         }else {
+            Toast.makeText(this,"You must login to Order this product",Toast.LENGTH_SHORT).show();
 
         }
 

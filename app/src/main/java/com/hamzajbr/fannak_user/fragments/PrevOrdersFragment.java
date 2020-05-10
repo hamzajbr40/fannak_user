@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,14 +51,18 @@ public class PrevOrdersFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_prev_orders, container, false);
         unbinder = ButterKnife.bind(this,view);
         previousOrderViewModel = ViewModelProviders.of(this).get(PreviousOrderViewModel.class);
-        int id = Utils.getValue(getContext(),"id",0);
+        int id = Utils.getValue(getContext(),"userId",10);
+        Log.i("id","id = "+id);
         previousOrderViewModel.init(id);
         previousOrderViewModel.getPreviousOrders().observe(getViewLifecycleOwner(), new Observer<List<ProductItem>>() {
             @Override
             public void onChanged(List<ProductItem> productItems) {
+                if(productItems!=null){
                 adapter.setProducts((ArrayList<ProductItem>) productItems);
                 adapter.notifyDataSetChanged();
+                }
             }
+
         });
 
 

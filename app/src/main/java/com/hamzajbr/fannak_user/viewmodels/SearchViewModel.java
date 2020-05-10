@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.hamzajbr.fannak_user.models.ProductItem;
 import com.hamzajbr.fannak_user.models.requests.SearchByCategoryRequest;
+import com.hamzajbr.fannak_user.models.requests.SearchByNameRequest;
 import com.hamzajbr.fannak_user.models.requests.SearchByTypeRequest;
 import com.hamzajbr.fannak_user.repositories.SearchRepository;
 
@@ -27,6 +28,12 @@ public class SearchViewModel extends ViewModel {
     }
     //By type
     public void init(SearchByTypeRequest request) {
+
+        searchRepository = SearchRepository.getInstance();
+        searchedResult = searchRepository.search(request);
+    }
+    //By name
+    public void init(SearchByNameRequest request) {
 
         searchRepository = SearchRepository.getInstance();
         searchedResult = searchRepository.search(request);
