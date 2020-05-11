@@ -41,12 +41,7 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionsV
         OptionItem item = options.get(position);
         holder.icon.setImageResource(item.icon);
         holder.label.setText(item.label);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callback.onClick(item);
-            }
-        });
+        holder.itemView.setOnClickListener(v -> callback.onClick(item));
 
 
     }

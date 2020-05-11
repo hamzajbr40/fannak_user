@@ -38,7 +38,7 @@ public class MoreFragment extends Fragment {
     @BindView(R.id.logout_btn)
     MaterialButton logoutBtn;
 
-    boolean signedIn;
+    private boolean signedIn;
 
 
     public MoreFragment() {

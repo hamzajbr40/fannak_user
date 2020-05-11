@@ -58,52 +58,40 @@ public class SignUpActivity extends AppCompatActivity {
 
 
         //for card stroke color indicator
-        emailEt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                emailCard.setStrokeColor(getResources().getColor(R.color.black));
-                nameCard.setStrokeColor(getResources().getColor(R.color.card_default_color));
-                passwordCard.setStrokeColor(getResources().getColor(R.color.card_default_color));
-                confirmPassCard.setStrokeColor(getResources().getColor(R.color.card_default_color));
+        emailEt.setOnFocusChangeListener((v, hasFocus) -> {
+            emailCard.setStrokeColor(getResources().getColor(R.color.black));
+            nameCard.setStrokeColor(getResources().getColor(R.color.card_default_color));
+            passwordCard.setStrokeColor(getResources().getColor(R.color.card_default_color));
+            confirmPassCard.setStrokeColor(getResources().getColor(R.color.card_default_color));
 
 
-            }
         });
 
         //for card stroke color indicator
-        nameEt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                nameCard.setStrokeColor(getResources().getColor(R.color.black));
-                emailCard.setStrokeColor(getResources().getColor(R.color.card_default_color));
-                passwordCard.setStrokeColor(getResources().getColor(R.color.card_default_color));
-                confirmPassCard.setStrokeColor(getResources().getColor(R.color.card_default_color));
+        nameEt.setOnFocusChangeListener((v, hasFocus) -> {
+            nameCard.setStrokeColor(getResources().getColor(R.color.black));
+            emailCard.setStrokeColor(getResources().getColor(R.color.card_default_color));
+            passwordCard.setStrokeColor(getResources().getColor(R.color.card_default_color));
+            confirmPassCard.setStrokeColor(getResources().getColor(R.color.card_default_color));
 
-            }
         });
 
         //for card stroke color indicator
-        passwordEt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                passwordCard.setStrokeColor(getResources().getColor(R.color.black));
-                nameCard.setStrokeColor(getResources().getColor(R.color.card_default_color));
-                emailCard.setStrokeColor(getResources().getColor(R.color.card_default_color));
-                confirmPassCard.setStrokeColor(getResources().getColor(R.color.card_default_color));
+        passwordEt.setOnFocusChangeListener((v, hasFocus) -> {
+            passwordCard.setStrokeColor(getResources().getColor(R.color.black));
+            nameCard.setStrokeColor(getResources().getColor(R.color.card_default_color));
+            emailCard.setStrokeColor(getResources().getColor(R.color.card_default_color));
+            confirmPassCard.setStrokeColor(getResources().getColor(R.color.card_default_color));
 
-            }
         });
 
         //for card stroke color indicator
-        confirmPassEt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                emailCard.setStrokeColor(getResources().getColor(R.color.card_default_color));
-                nameCard.setStrokeColor(getResources().getColor(R.color.card_default_color));
-                passwordCard.setStrokeColor(getResources().getColor(R.color.card_default_color));
-                confirmPassCard.setStrokeColor(getResources().getColor(R.color.black));
+        confirmPassEt.setOnFocusChangeListener((v, hasFocus) -> {
+            emailCard.setStrokeColor(getResources().getColor(R.color.card_default_color));
+            nameCard.setStrokeColor(getResources().getColor(R.color.card_default_color));
+            passwordCard.setStrokeColor(getResources().getColor(R.color.card_default_color));
+            confirmPassCard.setStrokeColor(getResources().getColor(R.color.black));
 
-            }
         });
 
     }

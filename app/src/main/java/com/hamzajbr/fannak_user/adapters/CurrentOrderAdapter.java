@@ -57,12 +57,7 @@ public class CurrentOrderAdapter extends RecyclerView.Adapter<CurrentOrderAdapte
         byte[] imageByteArray = Base64.decode(item.image,Base64.DEFAULT);
         Glide.with(context).load(imageByteArray).into(holder.productImg);
 
-        holder.completeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callback.onClick(item);
-            }
-        });
+        holder.completeBtn.setOnClickListener(v -> callback.onClick(item));
 
     }
 

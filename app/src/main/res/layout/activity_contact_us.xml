@@ -84,7 +84,6 @@
         app:icon="@drawable/ic_call"
         app:iconSize="20dp"
         android:textAllCaps="false"
-        android:onClick="dial"
         android:fontFamily="@font/english_medium"
         android:gravity="end|center_vertical"
         android:foreground="?android:attr/actionBarItemBackground"

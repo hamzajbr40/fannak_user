@@ -16,12 +16,12 @@ import com.hamzajbr.fannak_user.models.DeveloperItem;
 import java.util.ArrayList;
 
 public class AboutUsAdapter extends RecyclerView.Adapter<AboutUsAdapter.AboutUsViewHolder> {
-    Context context;
-    ArrayList<DeveloperItem> mylist;
+    private Context context;
+    private ArrayList<DeveloperItem> myList;
 
-    public AboutUsAdapter(Context context, ArrayList<DeveloperItem> mylist) {
+    public AboutUsAdapter(Context context, ArrayList<DeveloperItem> myList) {
         this.context = context;
-        this.mylist = mylist;
+        this.myList = myList;
     }
 
     @NonNull
@@ -34,7 +34,7 @@ public class AboutUsAdapter extends RecyclerView.Adapter<AboutUsAdapter.AboutUsV
 
     @Override
     public void onBindViewHolder(@NonNull AboutUsViewHolder holder, int position) {
-        DeveloperItem item = mylist.get(position);
+        DeveloperItem item = myList.get(position);
         holder.nameTv.setText(item.name);
         holder.descriptionTv.setText(item.description);
         holder.profileImg.setImageResource(item.image);
@@ -44,7 +44,7 @@ public class AboutUsAdapter extends RecyclerView.Adapter<AboutUsAdapter.AboutUsV
 
     @Override
     public int getItemCount() {
-        return mylist.size();
+        return myList.size();
     }
 
     class AboutUsViewHolder extends RecyclerView.ViewHolder{

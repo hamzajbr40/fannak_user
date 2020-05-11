@@ -1,15 +1,13 @@
 package com.hamzajbr.fannak_user.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
+
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.widget.EditText;
 
 import com.hamzajbr.fannak_user.R;
@@ -21,7 +19,6 @@ import com.hamzajbr.fannak_user.models.requests.SearchByTypeRequest;
 import com.hamzajbr.fannak_user.viewmodels.SearchViewModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -65,25 +62,18 @@ public class AllProductsActivity extends AppCompatActivity {
                 break;
         }
 
-        adapter = new ProductsAdapter(this, new ProductsAdapter.IProducts() {
-            @Override
-            public void onClick(ProductItem item) {
-                Intent i = new Intent(AllProductsActivity.this, ProductActivity.class);
-                i.putExtra("product",item);
-                startActivity(i);
-            }
+        adapter = new ProductsAdapter(this, item -> {
+            Intent i = new Intent(AllProductsActivity.this, ProductActivity.class);
+            i.putExtra("product", item);
+            startActivity(i);
         });
         productsRv.setAdapter(adapter);
         productsRv.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
 
 
-
-        searchViewModel.getSearchedResult().observe(this, new Observer<List<ProductItem>>() {
-            @Override
-            public void onChanged(List<ProductItem> productItems) {
-                if(productItems != null){
-                    adapter.setProducts((ArrayList<ProductItem>) productItems);
-                }
+        searchViewModel.getSearchedResult().observe(this, productItems -> {
+            if (productItems != null) {
+                adapter.setProducts((ArrayList<ProductItem>) productItems);
             }
         });
         adapter.notifyDataSetChanged();
@@ -101,12 +91,9 @@ public class AllProductsActivity extends AppCompatActivity {
         SearchByNameRequest request = new SearchByNameRequest();
         request.name = searchKey;
         searchViewModel.init(request);
-        searchViewModel.getSearchedResult().observe(this, new Observer<List<ProductItem>>() {
-            @Override
-            public void onChanged(List<ProductItem> productItems) {
-                if (productItems!=null)
-                    adapter.setProducts((ArrayList<ProductItem>) productItems);
-            }
+        searchViewModel.getSearchedResult().observe(this, productItems -> {
+            if (productItems != null)
+                adapter.setProducts((ArrayList<ProductItem>) productItems);
         });
 
     }

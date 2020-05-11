@@ -29,8 +29,8 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         this.callback = callback;
     }
     public void setProducts( ArrayList<ProductItem> myList){
-        if(myList!=null)
-            this.myList = myList;
+
+        this.myList = myList;
         notifyDataSetChanged();
     }
 
@@ -54,12 +54,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         byte[] imageByteArray = Base64.decode(item.image,Base64.DEFAULT);
         Glide.with(context).load(imageByteArray).into(holder.productImg);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callback.onClick(item);
-            }
-        });
+        holder.itemView.setOnClickListener(v -> callback.onClick(item));
 
 
     }

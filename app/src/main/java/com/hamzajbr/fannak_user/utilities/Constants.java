@@ -33,7 +33,6 @@ public class Constants {
     public static final String ENGLISH_FONT_EXTENSION = ".otf";
     public static final String ARABIC_FONT_EXTENSION = ".ttf";
 
-    public static final int MAP_ICON_SIZE = 125;
 
     public static final String LAST_LATITUDE = "LAST_LATITUDE";
     public static final String LAST_LONGITUDE = "LAST_LONGITUDE";

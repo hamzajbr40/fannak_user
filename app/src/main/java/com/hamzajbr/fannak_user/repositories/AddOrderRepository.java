@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.hamzajbr.fannak_user.managers.RestClient;
-import com.hamzajbr.fannak_user.models.responses.BaseResponse;
+
 import com.hamzajbr.fannak_user.models.responses.BasicResponse;
 
 import retrofit2.Call;

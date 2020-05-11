@@ -37,8 +37,8 @@ public class Utils {
         intent.putExtra(Intent.EXTRA_TEXT, text);
 
         mContext.startActivity(intent);
-
     }
+
     public static boolean isEmail(EditText text) {
         CharSequence email = text.getText().toString();
         return (!TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());

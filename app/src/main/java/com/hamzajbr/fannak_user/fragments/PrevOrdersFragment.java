@@ -1,5 +1,6 @@
 package com.hamzajbr.fannak_user.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,7 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hamzajbr.fannak_user.R;
+import com.hamzajbr.fannak_user.activities.AllProductsActivity;
+import com.hamzajbr.fannak_user.activities.ProductActivity;
 import com.hamzajbr.fannak_user.adapters.ProductsAdapter;
+
 import com.hamzajbr.fannak_user.models.ProductItem;
 import com.hamzajbr.fannak_user.utilities.Utils;
 import com.hamzajbr.fannak_user.viewmodels.PreviousOrderViewModel;
@@ -31,13 +35,15 @@ import butterknife.Unbinder;
  */
 public class PrevOrdersFragment extends Fragment {
 
-    Unbinder unbinder;
+    private Unbinder unbinder;
     @BindView(R.id.prev_order_rv)
     RecyclerView prevOrdersRv;
 
-    ProductsAdapter adapter;
+    private ProductsAdapter adapter;
 
-    PreviousOrderViewModel previousOrderViewModel;
+    private PreviousOrderViewModel previousOrderViewModel;
+
+
 
     public PrevOrdersFragment() {
         // Required empty public constructor
@@ -50,34 +56,38 @@ public class PrevOrdersFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_prev_orders, container, false);
         unbinder = ButterKnife.bind(this,view);
+        initPrevOrderRecycler();
+
+
         previousOrderViewModel = ViewModelProviders.of(this).get(PreviousOrderViewModel.class);
-        int id = Utils.getValue(getContext(),"userId",10);
-        Log.i("id","id = "+id);
+        int id = Utils.getValue(getContext(), "userId", 10);
+        Log.i("id", "id = " + id);
         previousOrderViewModel.init(id);
         previousOrderViewModel.getPreviousOrders().observe(getViewLifecycleOwner(), new Observer<List<ProductItem>>() {
             @Override
             public void onChanged(List<ProductItem> productItems) {
-                if(productItems!=null){
-                adapter.setProducts((ArrayList<ProductItem>) productItems);
-                adapter.notifyDataSetChanged();
+                if (productItems != null) {
+                    adapter.setProducts((ArrayList<ProductItem>) productItems);
+                    adapter.notifyDataSetChanged();
                 }
             }
 
         });
 
 
+
         return view;
     }
     private void initPrevOrderRecycler(){
-        adapter = new ProductsAdapter(getContext(), new ProductsAdapter.IProducts() {
-            @Override
-            public void onClick(ProductItem item) {
-
-            }
+        adapter = new ProductsAdapter(getContext(), item -> {
+            Intent i = new Intent(getActivity(), ProductActivity.class);
+            i.putExtra("product", item);
+            startActivity(i);
         });
         prevOrdersRv.setAdapter(adapter);
         prevOrdersRv.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false));
         adapter.notifyDataSetChanged();
     }
+
 
 }

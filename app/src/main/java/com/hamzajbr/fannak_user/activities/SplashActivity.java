@@ -18,11 +18,6 @@ public class SplashActivity extends AppCompatActivity {
 
 
         handler  = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Utils.goToActivity(SplashActivity.this,LanguageActivity.class,true);
-            }
-        },5000);
+        handler.postDelayed(() -> Utils.goToActivity(SplashActivity.this, LanguageActivity.class, true), 5000);
     }
 }

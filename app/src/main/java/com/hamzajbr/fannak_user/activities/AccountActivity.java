@@ -3,8 +3,7 @@ package com.hamzajbr.fannak_user.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageButton;
+
 import android.widget.TextView;
 
 import com.hamzajbr.fannak_user.R;
@@ -35,7 +34,7 @@ public class AccountActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.back_btn)
-    public void back(View v){
+    public void back() {
         finish();
     }
 }

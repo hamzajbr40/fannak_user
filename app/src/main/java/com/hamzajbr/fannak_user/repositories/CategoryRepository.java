@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.hamzajbr.fannak_user.managers.RestClient;
 import com.hamzajbr.fannak_user.models.CategoryItem;
-import com.hamzajbr.fannak_user.models.SubCategoryItem;
+
 import com.hamzajbr.fannak_user.models.responses.BaseResponse;
 
 import java.util.List;
@@ -32,6 +32,7 @@ public class CategoryRepository {
             @Override
             public void onResponse(Call<BaseResponse<List<CategoryItem>>> call, Response<BaseResponse<List<CategoryItem>>> response) {
                 if (response.isSuccessful()){
+                    assert response.body() != null;
                     categoriesData.setValue(response.body().data);
                 }
             }

@@ -16,9 +16,9 @@ import java.util.ArrayList;
 
 public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.SubCategoryViewHolder> {
 
-    Context context;
-    ArrayList<SubCategoryItem> items = new ArrayList<>();
-    ISubCategory callback;
+    private Context context;
+    private ArrayList<SubCategoryItem> items = new ArrayList<>();
+    private ISubCategory callback;
 
     public SubCategoryAdapter(Context context,  ISubCategory callback) {
         this.context = context;
@@ -40,12 +40,7 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
     public void onBindViewHolder(@NonNull SubCategoryViewHolder holder, int position) {
         SubCategoryItem item = items.get(position);
         holder.label.setText(item.label);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callback.onClick(item);
-            }
-        });
+        holder.itemView.setOnClickListener(v -> callback.onClick(item));
 
 
     }

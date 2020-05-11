@@ -37,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     MaterialCardView passwordCard;
     private LoginViewModel loginViewModel;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,26 +70,28 @@ public class LoginActivity extends AppCompatActivity {
     void signIn() {
         if (isDataAreValid()) {
 
+
             loginViewModel.init(createLoginRequest());
             loginViewModel.getResponse().observe(this, new Observer<BaseResponse<LoginResponse>>() {
                 @Override
                 public void onChanged(BaseResponse<LoginResponse> loginResponseBaseResponse) {
-                    int id = 10;
-                    if(loginResponseBaseResponse.executionSuccessful) {
+                    int id = loginResponseBaseResponse.data.id;
+                    if (loginResponseBaseResponse.executionSuccessful) {
 
-                        if(loginResponseBaseResponse.data!=null) {
+                        if (loginResponseBaseResponse.data != null) {
                             String name = loginResponseBaseResponse.data.name;
-                            //id = loginResponseBaseResponse.data.id;
+
                             Utils.setValue(LoginActivity.this, "email", emailEt.getText().toString());
                             Utils.setValue(LoginActivity.this, "name", name);
                             Utils.setValue(LoginActivity.this, "userId", id);
-                            Log.i("id","id = "+loginResponseBaseResponse.data.id);
+                            Log.i("id", "id = " + loginResponseBaseResponse.data.id);
                             Utils.setValue(LoginActivity.this, "signed in", true);
                             Utils.goToActivity(LoginActivity.this, MainActivity.class, true);
                         }
                     }
                 }
             });
+
         }
     }
 

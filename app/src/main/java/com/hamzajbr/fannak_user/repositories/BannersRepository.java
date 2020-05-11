@@ -32,8 +32,10 @@ public class BannersRepository {
         call.enqueue(new Callback<BaseResponse<List<BannerItem>>>() {
             @Override
             public void onResponse(Call<BaseResponse<List<BannerItem>>> call, Response<BaseResponse<List<BannerItem>>> response) {
-                if (response.isSuccessful())
+                if (response.isSuccessful()) {
+                    assert response.body() != null;
                     bannersData.setValue(response.body().data);
+                }
             }
 
             @Override

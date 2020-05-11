@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.view.View;
+
 
 import com.hamzajbr.fannak_user.R;
 import com.hamzajbr.fannak_user.adapters.AboutUsAdapter;
@@ -31,7 +31,7 @@ public class AboutUsActivity extends AppCompatActivity {
 
     }
     @OnClick(R.id.back_btn)
-    void back(View view){
+    void back() {
         onBackPressed();
         finish();
     }

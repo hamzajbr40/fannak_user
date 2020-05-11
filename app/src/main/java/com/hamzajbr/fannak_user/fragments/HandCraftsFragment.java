@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
+
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,12 +16,12 @@ import android.view.ViewGroup;
 import com.hamzajbr.fannak_user.R;
 import com.hamzajbr.fannak_user.activities.AllProductsActivity;
 import com.hamzajbr.fannak_user.adapters.SubCategoryAdapter;
-import com.hamzajbr.fannak_user.models.CategoryItem;
+
 import com.hamzajbr.fannak_user.models.SubCategoryItem;
 import com.hamzajbr.fannak_user.viewmodels.CategoriesViewModel;
 
 import java.util.ArrayList;
-import java.util.List;
+
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,7 +35,7 @@ public class HandCraftsFragment extends Fragment {
 
     @BindView(R.id.handcrafts_sub_category_rv)
     RecyclerView handcraftsRv;
-    Unbinder unbinder;
+    private Unbinder unbinder;
 
     private SubCategoryAdapter adapter;
     private CategoriesViewModel categoriesViewModel;
@@ -55,12 +55,7 @@ public class HandCraftsFragment extends Fragment {
         initHandcraftsRecycler();
         categoriesViewModel = ViewModelProviders.of(getActivity()).get(CategoriesViewModel.class);
         categoriesViewModel.init();
-        categoriesViewModel.getAllCategories().observe(getViewLifecycleOwner(), new Observer<List<CategoryItem>>() {
-            @Override
-            public void onChanged(List<CategoryItem> categoryItems) {
-                adapter.setItems((ArrayList<SubCategoryItem>) categoryItems.get(1).subCategoryList);
-            }
-        });
+        categoriesViewModel.getAllCategories().observe(getViewLifecycleOwner(), categoryItems -> adapter.setItems((ArrayList<SubCategoryItem>) categoryItems.get(1).subCategoryList));
 
         return v;
     }

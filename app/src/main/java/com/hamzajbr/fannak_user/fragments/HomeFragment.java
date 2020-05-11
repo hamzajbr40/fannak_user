@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
@@ -30,7 +30,6 @@ import com.hamzajbr.fannak_user.viewmodels.FeaturedViewModel;
 
 import java.util.ArrayList;
 
-import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
