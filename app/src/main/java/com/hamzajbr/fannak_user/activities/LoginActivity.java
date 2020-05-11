@@ -75,7 +75,9 @@ public class LoginActivity extends AppCompatActivity {
             loginViewModel.getResponse().observe(this, new Observer<BaseResponse<LoginResponse>>() {
                 @Override
                 public void onChanged(BaseResponse<LoginResponse> loginResponseBaseResponse) {
-                    int id = loginResponseBaseResponse.data.id;
+                    int id = 10;
+                    if (loginResponseBaseResponse.data.id != 0)
+                        id = loginResponseBaseResponse.data.id;
                     if (loginResponseBaseResponse.executionSuccessful) {
 
                         if (loginResponseBaseResponse.data != null) {
@@ -83,8 +85,10 @@ public class LoginActivity extends AppCompatActivity {
 
                             Utils.setValue(LoginActivity.this, "email", emailEt.getText().toString());
                             Utils.setValue(LoginActivity.this, "name", name);
-                            Utils.setValue(LoginActivity.this, "userId", id);
-                            Log.i("id", "id = " + loginResponseBaseResponse.data.id);
+                            if (id != 0) {
+                                Utils.setValue(LoginActivity.this, "userId", id);
+                                Log.i("id", "id = " + id);
+                            }
                             Utils.setValue(LoginActivity.this, "signed in", true);
                             Utils.goToActivity(LoginActivity.this, MainActivity.class, true);
                         }
